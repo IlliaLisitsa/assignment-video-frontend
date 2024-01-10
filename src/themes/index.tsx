@@ -22,7 +22,7 @@ export default function ThemeCustomization({ children }: ThemeCustomizationProps
           sm: 768,
           md: 1024,
           lg: 1266,
-          xl: 1440
+          xl: 1250
         }
       },
       palette: theme.palette,
@@ -33,6 +33,7 @@ export default function ThemeCustomization({ children }: ThemeCustomizationProps
 
   const themes: Theme = createTheme(themeOptions);
 
+  //@ts-ignore
   themes.components = { ...theme.components, ...componentsOverride(themes) };
 
   return (

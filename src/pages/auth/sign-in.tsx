@@ -7,7 +7,7 @@ import { LoginForm } from '@/components/auth';
 
 export default function SignIn() {
   return (
-    <Page title={en.projectName}>
+    <Page title={en.signIn}>
       <Box minHeight="100vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
         <Typography variant="h1" mb={5}>
           {en.signIn}

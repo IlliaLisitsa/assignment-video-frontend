@@ -17,8 +17,8 @@ export const LoginForm = () => {
 
   const methods = useForm<LoginValuesProps>({
     defaultValues: {
-      [LoginFieldNames.EMAIL]: '',
-      [LoginFieldNames.PASSWORD]: '',
+      [LoginFieldNames.EMAIL]: 'example@example.com',
+      [LoginFieldNames.PASSWORD]: 'YourStr0NgPassw0rd123!',
       [LoginFieldNames.REMEMBER_ME]: false
     },
     resolver: yupResolver(validationSignInSchema)

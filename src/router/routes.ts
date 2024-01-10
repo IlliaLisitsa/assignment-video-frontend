@@ -3,5 +3,7 @@ export const AUTH_ROUTES = {
 };
 
 export const VIEWER_ROUTES = {
-  MOVIES: '/viewer/movies'
+  MOVIES: '/viewer/movies',
+  CREATE_MOVIE: '/viewer/movies/create',
+  updateMovie: (movieId: number) => `/viewer/movies/update/${movieId}`
 };

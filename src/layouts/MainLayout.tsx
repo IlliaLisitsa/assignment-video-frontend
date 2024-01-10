@@ -16,7 +16,7 @@ const StyledMain = styled.main`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 130px;
+    height: 150px;
     background-image: url('/waves.svg');
     background-repeat: no-repeat;
     background-size: cover;

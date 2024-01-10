@@ -7,5 +7,19 @@ export const en = {
   login: 'Login',
   invalidEmail: 'Invalid email address',
   fieldRequired: 'Field required',
-  passwordRequired: 'Password required'
+  passwordRequired: 'Password required',
+  movies: 'Movies',
+  yourMovieListIsEmpty: 'Your movie list is empty',
+  addNewMovie: 'Add a new movie',
+  createNewMovie: 'Create a new movie',
+  submit: 'Submit',
+  cancel: 'Cancel',
+  dropImageHere: 'Drop an image here',
+  title: 'Title',
+  publishingYear: 'Publishing year',
+  myMovies: 'My movies',
+  logOut: 'Logout',
+  edit: 'Edit',
+  update: 'Update',
+  success: 'Success'
 };

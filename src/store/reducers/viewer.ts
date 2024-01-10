@@ -1,9 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IViewer } from '../types/viewer/interfaces';
+import { IMovie, IViewer } from '../types/viewer/interfaces';
 import { resetAll, RootState } from '../index';
 
 export interface IViewerState {
   viewer?: IViewer;
+  movies: {
+    items: IMovie[];
+    count: number;
+  };
   isAuthenticated: boolean;
   accessToken: string;
   refreshToken: string;
@@ -11,6 +15,10 @@ export interface IViewerState {
 
 const initialState: IViewerState = {
   viewer: undefined,
+  movies: {
+    items: [],
+    count: 0
+  },
   isAuthenticated: false,
   accessToken: '',
   refreshToken: ''
@@ -34,6 +42,15 @@ export const viewer = createSlice({
       state.isAuthenticated = false;
       state.accessToken = '';
       state.refreshToken = '';
+    },
+    setMovies: (
+      state,
+      action: PayloadAction<{
+        items: IMovie[];
+        count: number;
+      }>
+    ) => {
+      state.movies = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -43,9 +60,15 @@ export const viewer = createSlice({
 
 export default viewer.reducer;
 
-export const { setViewerWithTokens } = viewer.actions;
+export const { setViewerWithTokens, setMovies } = viewer.actions;
 
 export const selectAccessToken = (state: RootState): string => state.viewer.accessToken;
 export const selectRefreshToken = (state: RootState): string => state.viewer.refreshToken;
 export const selectViewer = (state: RootState): IViewer | undefined => state.viewer.viewer;
 export const selectIsAuthenticated = (state: RootState): boolean => state.viewer.isAuthenticated;
+export const selectMoviesData = (
+  state: RootState
+): {
+  items: IMovie[];
+  count: number;
+} => state.viewer.movies;

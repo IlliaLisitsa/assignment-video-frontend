@@ -5,6 +5,9 @@ import { Provider as ReduxProvider } from 'react-redux';
 import ThemeCustomization from '@/themes';
 import { store } from '@/store';
 import { AuthProvider } from '@/layouts/context/AuthContext';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type LayoutProps = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -21,6 +24,8 @@ export default function App({ Component, pageProps }: AppProps & Props) {
   return (
     <ReduxProvider store={store}>
       <ThemeCustomization>
+        <ToastContainer position="top-left" />
+
         <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
       </ThemeCustomization>
     </ReduxProvider>
