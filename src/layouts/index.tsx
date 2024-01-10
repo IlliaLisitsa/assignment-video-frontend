@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import AuthGuard from '@/utils/guards/AuthGuard';
+import { MainLayout } from './MainLayout';
 
 interface Props {
   children: ReactElement;
@@ -8,8 +9,12 @@ interface Props {
 
 export default function Layout({ variant, children }: Props) {
   if (variant === 'withAuth') {
-    return <AuthGuard>{children}</AuthGuard>;
+    return (
+      <MainLayout>
+        <AuthGuard>{children}</AuthGuard>
+      </MainLayout>
+    );
   }
 
-  return <>{children}</>;
+  return <MainLayout>{children}</MainLayout>;
 }

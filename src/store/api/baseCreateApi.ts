@@ -68,7 +68,7 @@ const axiosBaseQuery =
         }
 
         try {
-          const refreshResult = await axios({ method: HttpMethods.POST, url: '/auth/refresh-token', data: { refreshToken } });
+          const refreshResult = await axios({ method: HttpMethods.POST, url: '/auth/refresh', data: { refreshToken } });
 
           if (!refreshResult.data) {
             Cookie.remove(CookiesNames.ACCESS_TOKEN);

@@ -1,16 +1,37 @@
 import { createTheme } from '@mui/material/styles';
-import { presetPalettes, PalettesProps } from '@ant-design/colors';
+
+declare module '@mui/material/styles/createPalette' {
+  interface TypeBackground {
+    light: string;
+    dark: string;
+  }
+}
 
 const Palette = () => {
-  const colors: PalettesProps = presetPalettes;
-
-  colors.grey = ['#ffffff', '#fafafa', '#f5f5f5', '#f0f0f0', '#d9d9d9', '#bfbfbf', '#8c8c8c', '#595959', '#262626', '#141414', '#000000'];
-
   return createTheme({
     palette: {
+      text: {
+        primary: '#fff',
+        secondary: '#fff'
+      },
+      primary: {
+        main: '#2BD17E'
+      },
+      secondary: {
+        main: '#fff'
+      },
       common: {
         black: '#000',
         white: '#fff'
+      },
+      background: {
+        paper: '#fff',
+        light: '#224957',
+        default: '#093545',
+        dark: '#092C39'
+      },
+      error: {
+        main: '#EB5757'
       }
     }
   });

@@ -8,20 +8,23 @@ import { CookiesNames } from '../types/common/enums';
 export const authApi = baseCreateApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.query<LoginResponse, LoginRequest>({
-      query({ email, password }) {
+      query({ email, password, rememberMe }) {
         return {
-          url: '/auth/login',
+          url: '/auth/sign-in',
           method: HttpMethods.POST,
-          body: { email, password }
+          body: { email, password, rememberMe }
         };
       },
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled.then(({ data }) => {
-            dispatch(setViewerWithTokens({ viewer: data.profile, accessToken: data.accessToken, refreshToken: data.refreshToken }));
+            dispatch(setViewerWithTokens({ viewer: data.user, accessToken: data.authToken, refreshToken: data.refreshToken }));
 
-            Cookie.set(CookiesNames.ACCESS_TOKEN, data.accessToken);
-            Cookie.set(CookiesNames.REFRESH_TOKEN, data.refreshToken);
+            Cookie.set(CookiesNames.ACCESS_TOKEN, data.authToken);
+
+            if (args.rememberMe) {
+              Cookie.set(CookiesNames.REFRESH_TOKEN, data.refreshToken);
+            }
           });
         } catch (e: any) {
           console.info(`Error: authApi > login [ ${e?.error?.data?.message} ]`);
@@ -31,7 +34,7 @@ export const authApi = baseCreateApi.injectEndpoints({
     refreshToken: builder.query<RefreshTokenResponse, RefreshTokenRequest>({
       query({ refreshToken }) {
         return {
-          url: '/auth/refresh-token',
+          url: '/auth/refresh',
           method: HttpMethods.POST,
           body: { refreshToken }
         };
@@ -39,9 +42,9 @@ export const authApi = baseCreateApi.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           await queryFulfilled.then(({ data }) => {
-            dispatch(setViewerWithTokens({ viewer: data.profile, accessToken: data.accessToken, refreshToken: data.refreshToken }));
+            dispatch(setViewerWithTokens({ viewer: data.user, accessToken: data.authToken, refreshToken: data.refreshToken }));
 
-            Cookie.set(CookiesNames.ACCESS_TOKEN, data.accessToken);
+            Cookie.set(CookiesNames.ACCESS_TOKEN, data.authToken);
             Cookie.set(CookiesNames.REFRESH_TOKEN, data.refreshToken);
           });
         } catch (e: any) {

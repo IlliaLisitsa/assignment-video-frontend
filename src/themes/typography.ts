@@ -1,5 +1,13 @@
 import { Theme, TypographyVariantsOptions } from '@mui/material/styles';
 import { Montserrat } from 'next/font/google';
+import { pxToRem } from '@/utils/fontSizing';
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    'body-xs': true;
+    'body-xl': true;
+  }
+}
 
 const primaryFont = Montserrat({
   weight: ['400', '500', '600', '700'],
@@ -9,64 +17,67 @@ const primaryFont = Montserrat({
 });
 
 const Typography = (theme: Theme): TypographyVariantsOptions => ({
-  htmlFontSize: 16,
   fontFamily: primaryFont.style.fontFamily,
+  htmlFontSize: 16,
   fontWeightLight: 400,
   fontWeightRegular: 500,
   fontWeightMedium: 600,
   fontWeightBold: 700,
   h1: {
     fontWeight: 600,
-    fontSize: '2.375rem',
-    lineHeight: 1.21
+    fontSize: pxToRem(64),
+    lineHeight: pxToRem(80)
   },
   h2: {
-    fontWeight: 700,
-    fontSize: '1.25rem',
-    lineHeight: 1.33
+    fontWeight: 600,
+    fontSize: pxToRem(48),
+    lineHeight: pxToRem(56)
   },
   h3: {
-    fontWeight: 500,
-    fontSize: '1.5rem',
-    lineHeight: 1.27
+    fontWeight: 600,
+    fontSize: pxToRem(32),
+    lineHeight: pxToRem(40)
   },
   h4: {
-    fontWeight: 600,
-    fontSize: '1.25rem',
-    lineHeight: 1.4
+    fontWeight: 700,
+    fontSize: pxToRem(24),
+    lineHeight: pxToRem(32)
   },
   h5: {
-    fontWeight: 600,
-    fontSize: '1rem',
-    lineHeight: 1.5
+    fontWeight: 700,
+    fontSize: pxToRem(20),
+    lineHeight: pxToRem(24)
   },
   h6: {
+    fontWeight: 700,
+    fontSize: pxToRem(16),
+    lineHeight: pxToRem(24)
+  },
+  body1: {
+    fontWeight: 700,
+    fontSize: pxToRem(16),
+    lineHeight: pxToRem(24)
+  },
+  body2: {
     fontWeight: 400,
-    fontSize: '0.875rem',
-    lineHeight: 1.57
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(24)
+  },
+  // @ts-ignore
+  'body-xs': {
+    fontWeight: 400,
+    fontSize: pxToRem(12),
+    lineHeight: pxToRem(24)
+  },
+  'body-xl': {
+    fontWeight: 500,
+    fontSize: pxToRem(20),
+    lineHeight: pxToRem(32)
   },
   caption: {
     fontWeight: 400,
-    fontSize: '0.75rem',
-    lineHeight: 1.66
-  },
-  body1: {
-    fontSize: '0.875rem',
-    lineHeight: 1.57
-  },
-  body2: {
-    fontSize: '0.75rem',
-    lineHeight: 1.66
-  },
-  subtitle1: {
-    fontSize: '0.875rem',
-    fontWeight: 600,
-    lineHeight: 1.57
-  },
-  subtitle2: {
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    lineHeight: 1.66
+    fontSize: pxToRem(14),
+    lineHeight: pxToRem(16)
   }
 });
 
