@@ -1,6 +1,6 @@
 import { Theme, TypographyVariantsOptions } from '@mui/material/styles';
 import { Montserrat } from 'next/font/google';
-import { pxToRem } from '@/utils/fontSizing';
+import { pxToRem, responsiveFontSizes } from '@/utils/fontSizing';
 
 declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
@@ -26,12 +26,14 @@ const Typography = (theme: Theme): TypographyVariantsOptions => ({
   h1: {
     fontWeight: 600,
     fontSize: pxToRem(64),
-    lineHeight: pxToRem(80)
+    lineHeight: pxToRem(80),
+    ...responsiveFontSizes({ md: 48, def: 64 })
   },
   h2: {
     fontWeight: 600,
     fontSize: pxToRem(48),
-    lineHeight: pxToRem(56)
+    lineHeight: pxToRem(56),
+    ...responsiveFontSizes({ md: 32, def: 48 })
   },
   h3: {
     fontWeight: 600,
@@ -72,7 +74,8 @@ const Typography = (theme: Theme): TypographyVariantsOptions => ({
   'body-xl': {
     fontWeight: 500,
     fontSize: pxToRem(20),
-    lineHeight: pxToRem(32)
+    lineHeight: pxToRem(32),
+    ...responsiveFontSizes({ md: 16, def: 20 })
   },
   caption: {
     fontWeight: 400,

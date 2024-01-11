@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { VIEWER_ROUTES } from '@/router/routes';
 import { alpha } from '@mui/material/styles';
 import { toast } from 'react-toastify';
+import { useResponsiveness } from '@/utils/hooks/useResponsiveness';
 
 interface CreateUpdateMovieProps {
   onCancel: VoidFunction;
@@ -21,6 +22,8 @@ interface CreateUpdateMovieProps {
 
 export const CreateUpdateMovie: FC<CreateUpdateMovieProps> = ({ onCancel, movie }) => {
   const router = useRouter();
+
+  const isMobile = useResponsiveness('down', 'md');
 
   const [createMovieMutation] = useCreateMovieMutation();
   const [updateMovieMutation] = useUpdateMovieMutation();
@@ -83,9 +86,36 @@ export const CreateUpdateMovie: FC<CreateUpdateMovieProps> = ({ onCancel, movie 
 
   return (
     <FormProvider methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
-      <Box display="flex" flexWrap="wrap" columnGap="127px">
-        <RHFUploadFile size={500} name={CreateUpdateMovieFieldNames.POSTER} helperText={en.dropImageHere} onDrop={handleDrop} />
-        <Stack maxWidth={362} width="40%">
+      <Box
+        display="flex"
+        flexDirection={{ xs: 'column-reverse', md: 'row' }}
+        flexWrap="wrap"
+        columnGap={{ xs: 0, md: '110px' }}
+        maxWidth={{ xs: 500, md: 'unset' }}
+        pb={20}
+        mx="auto"
+      >
+        <Stack>
+          <Box display="flex" justifyContent="center">
+            <RHFUploadFile
+              size={isMobile ? 280 : 500}
+              name={CreateUpdateMovieFieldNames.POSTER}
+              helperText={en.dropImageHere}
+              onDrop={handleDrop}
+            />
+          </Box>
+          {isMobile && (
+            <Box display="flex" columnGap={2} mt={8}>
+              <Button fullWidth variant="outlined" color="secondary" onClick={onCancel}>
+                {en.cancel}
+              </Button>
+              <Button fullWidth variant="contained" color="primary" type="submit">
+                {movie ? en.update : en.submit}
+              </Button>
+            </Box>
+          )}
+        </Stack>
+        <Stack maxWidth={{ xs: '100%', md: 362 }} width={{ xs: '100%', md: '40%' }}>
           {!!errors.root && (
             <Alert
               severity="error"
@@ -111,16 +141,18 @@ export const CreateUpdateMovie: FC<CreateUpdateMovieProps> = ({ onCancel, movie 
             name={CreateUpdateMovieFieldNames.PUBLISHING_YEAR}
             autoComplete="none"
             placeholder={en.publishingYear}
-            sx={{ mt: 3, maxWidth: 216 }}
+            sx={{ mt: 3, maxWidth: { xs: '100%', md: 216 }, mb: { xs: 3, md: 0 } }}
           />
-          <Box display="flex" columnGap={2} mt={8}>
-            <Button fullWidth variant="outlined" color="secondary" onClick={onCancel}>
-              {en.cancel}
-            </Button>
-            <Button fullWidth variant="contained" color="primary" type="submit">
-              {movie ? en.update : en.submit}
-            </Button>
-          </Box>
+          {!isMobile && (
+            <Box display="flex" columnGap={2} mt={{ xs: 5, md: 8 }}>
+              <Button fullWidth variant="outlined" color="secondary" onClick={onCancel}>
+                {en.cancel}
+              </Button>
+              <Button fullWidth variant="contained" color="primary" type="submit">
+                {movie ? en.update : en.submit}
+              </Button>
+            </Box>
+          )}
         </Stack>
       </Box>
     </FormProvider>

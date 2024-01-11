@@ -34,7 +34,7 @@ export default function Movies() {
       {!isNeedLoader && (
         <Container maxWidth="xl">
           {!!moviesData.items.length ? (
-            <Stack display="flex" pt={15}>
+            <Stack display="flex" pt={{ xs: 10, md: 15 }}>
               <MoviesHeader onAddNewMovieClick={onAddNewMovieClick} />
               <MoviesList />
             </Stack>

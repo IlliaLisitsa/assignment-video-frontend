@@ -4,8 +4,12 @@ import { forwardRef } from 'react';
 
 export type UsedIconNames = 'material-symbols:download' | 'icons8:plus' | 'mdi:logout';
 
+interface RespFontSizes {
+  [key: string]: number;
+}
+
 interface IIconProps extends BoxProps {
-  size: number;
+  size: number | RespFontSizes;
   icon: UsedIconNames;
 }
 

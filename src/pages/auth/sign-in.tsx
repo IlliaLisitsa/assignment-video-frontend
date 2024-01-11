@@ -9,7 +9,7 @@ export default function SignIn() {
   return (
     <Page title={en.signIn}>
       <Box minHeight="100vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center">
-        <Typography variant="h1" mb={5}>
+        <Typography variant="h1" mb={{ xs: 3, md: 5 }}>
           {en.signIn}
         </Typography>
 

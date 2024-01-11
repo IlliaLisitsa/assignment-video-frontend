@@ -13,3 +13,27 @@ export default function getRatio(ratio = '1/1') {
     '1/1': '100%'
   }[ratio];
 }
+
+interface IResponsiveSizes {
+  [key: string]: string | { fontSize: string };
+}
+
+export const responsiveFontSizes = ({ sm, md, def }: { sm?: number; md?: number; def: number }) => {
+  const sizes: IResponsiveSizes = {
+    fontSize: pxToRem(def)
+  };
+
+  if (sm) {
+    sizes[`@media (max-width:768px)`] = {
+      fontSize: pxToRem(sm)
+    };
+  }
+
+  if (md) {
+    sizes[`@media (max-width:1024px)`] = {
+      fontSize: pxToRem(md)
+    };
+  }
+
+  return sizes;
+};
