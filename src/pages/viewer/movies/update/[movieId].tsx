@@ -31,8 +31,8 @@ export default function UpdateMovie() {
   return (
     <Page title={en.movies}>
       <Container maxWidth="xl">
-        <Box pt={15} display="flex" flexDirection="column" justifyContent="center">
-          <Typography variant="h2" mb={15}>
+        <Box pt={{ xs: 10, md: 15 }} display="flex" flexDirection="column" justifyContent="center">
+          <Typography variant="h2" mb={{ xs: 10, md: 15 }}>
             {en.edit}
           </Typography>
 

@@ -27,7 +27,7 @@ export const MoviesList = () => {
   };
 
   return (
-    <Stack width="100%" display="flex" mt={15} mb={30}>
+    <Stack width="100%" display="flex" mt={{ xs: 10, md: 15 }} mb={{ xs: 15, md: 30 }}>
       <Box display="flex" alignItems="center" justifyContent="center" flexWrap="wrap" gap={3}>
         {!!moviesData.items.length &&
           moviesData.items
@@ -38,11 +38,11 @@ export const MoviesList = () => {
       </Box>
 
       {!!moviesData.count && moviesData.count > MAX_MOVIES_PER_PAGE && (
-        <Box width="100%" display="flex" justifyContent="center" mt={15}>
+        <Box width="100%" display="flex" justifyContent="center" mt={{ xs: 5, md: 15 }}>
           <Pagination
             sx={{ paddingTop: '10px' }}
             color="primary"
-            count={Math.round(moviesData.count / MAX_MOVIES_PER_PAGE) || 0}
+            count={Math.ceil(moviesData.count / MAX_MOVIES_PER_PAGE) || 0}
             shape="rounded"
             page={currentPage}
             onChange={handleChangePage}
